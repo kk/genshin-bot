@@ -36,36 +36,7 @@ client.on('message', msg => {
     else {
       msg.reply(pull(1));
     }
-    /*
-    var result = generateResult();
-    if (result == "5 star") {
-        var flip = random(1, 2);
-        if (flip == 1) { // 50% chance to get childe
-            msg.reply("⭐⭐⭐⭐⭐" + " - " + gacha.fiveStarExclusive);
-        }
-        else {
-            msg.reply("⭐⭐⭐⭐⭐" + " - " + randomPull("fiveStarCharacters"));
-        }
-    }
-    else if (result == "4 star") {
-        var flip = random(1, 2);
-        if (flip == 1) { // 50% chance to get rate up 4* character
-            msg.reply("⭐⭐⭐⭐" + " - " + randomPull("fourStarRateUp"));
-        }
-        else {
-            var flip = random(1, 2);
-            if (flip == 1) { // regular 4* character (50% chance)
-                msg.reply("⭐⭐⭐⭐" + " - " + randomPull("fourStarOtherCharacter"));
-            }
-            else {  // regular 4* weapon
-              msg.reply("⭐⭐⭐⭐" + " - " + randomPull("fourStarOtherWeapon"));
-            }
-        }
-    }
-    else {
-        msg.reply("⭐⭐⭐" + " - " + randomPull("threeStar"));
-    }
-*/
+    
   }
 });
 

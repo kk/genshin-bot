@@ -1,0 +1,8 @@
+{
+    "threeStar" : ["3* weapon1", "3* weapon2"],
+    "fourStarOtherWeapon" : ["4* weapon1", "4* weapon2"],
+    "fourStarOtherCharacter" : ["4* character1", "4* character2"],
+    "fourStarRateUp" : ["Diona", "Ningguang", "Beidou"],
+    "fiveStarCharacters" : ["Keqing", "Mona", "Qiqi", "Diluc", "Jean"],
+    "fiveStarExclusive" : "Childe"
+}

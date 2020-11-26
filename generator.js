@@ -21,34 +21,52 @@ function generateResult() {
     }
 }
 
-var result = generateResult();
-if (result == "5 star") {
-    var flip = random(1, 2);
-    if (flip == 1) { // 50% chance to get childe
-        console.log(result + " - " + gacha.fiveStarExclusive);
-    }
-    else {
-        console.log(result + " - " + randomPull("fiveStarCharacters"));
-    }
-}
-else if (result == "4 star") {
-    var flip = random(1, 2);
-    if (flip == 1) { // 50% chance to get rate up 4* character
-        console.log(result + " - " + randomPull("fourStarRateUp"));
-    }
-    else {
-        var flip = random(1, 2);
-        if (flip == 1) { // regular 4* character (50% chance)
-            console.log(result + " - " + randomPull("fourStarOtherCharacter"));
+function pull(pulls) {
+    var response = "";
+    var pity = true; // 4* pity
+    for (i = 0; i < pulls; i++) {
+        var result = generateResult();
+        if (pity && (i == 9)) result = "4 star";
+
+        if (result == "5 star") {
+            var flip = random(1, 2);
+            if (flip == 1) { // 50% chance to get childe
+                response += (result + " - " + gacha.fiveStarExclusive);
+            }
+            else {
+                response += (result + " - " + randomPull("fiveStarCharacters"));
+            }
         }
-        else {  // regular 4* weapon
-            console.log(result + " - " + randomPull("fourStarOtherWeapon"));
+        else if (result == "4 star") {
+            pity = false;
+            var flip = random(1, 2);
+            if (flip == 1) { // 50% chance to get rate up 4* character
+                response += (result + " - " + randomPull("fourStarRateUp"));
+            }
+            else {
+                var flip = random(1, 2);
+                if (flip == 1) { // regular 4* character (50% chance)
+                    response += (result + " - " + randomPull("fourStarOtherCharacter"));
+                }
+                else {  // regular 4* weapon
+                    response += (result + " - " + randomPull("fourStarOtherWeapon"));
+                }
+            }
+        }
+        else {
+            response += (result + " - " + randomPull("threeStar"));
+        }
+    
+        if (i != (pulls - 1)) {
+            response += "\n";
         }
     }
+
+    return response;
 }
-else {
-    console.log(result + " - " + randomPull("threeStar"));
-}
+
+
+console.log(pull(3));
 
 function randomPull(key) {
     return gacha[key][Math.floor(Math.random() * gacha[key].length)];

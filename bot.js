@@ -1,4 +1,5 @@
 var config = require('./config.json');
+var gacha = require('./gacha.json');
 
 console.log("hello beep boop");
 
@@ -19,41 +20,47 @@ client.on('message', msg => {
 
 
 client.on('message', msg => {
+
   if (msg.content === '!roll' && msg.channel.id == '781076421581209601') {
+
     var result = generateResult();
     if (result == "5 star") {
-      var flip = random(1, 2);
-      if (flip == 1) { // 50% chance to get childe
-          msg.reply(result + " - " + fiveStarExclusive);
-      }
-      else {
-          msg.reply(result + " - " + fiveStarCharacters[Math.floor(Math.random() * fiveStarCharacters.length)] );
-      }
+        var flip = random(1, 2);
+        if (flip == 1) { // 50% chance to get childe
+            msg.reply("⭐⭐⭐⭐⭐" + " - " + gacha.fiveStarExclusive);
+        }
+        else {
+            msg.reply("⭐⭐⭐⭐⭐" + " - " + randomPull("fiveStarCharacters"));
+        }
     }
     else if (result == "4 star") {
-      var flip = random(1, 2);
-      if (flip == 1) { // 50% chance to get rate up 4* character
-          msg.reply(result + " - " + fourStarRateUp[Math.floor(Math.random() * fourStarRateUp.length)] );
-      }
-      else {
-          var flip = random(1, 2);
-          if (flip == 1) { // regular 4* character
-              msg.reply(result + " - " + fourStarOtherCharacter[Math.floor(Math.random() * fourStarOtherCharacter.length)] );
-          }
-          else {  // regular 4* weapon
-                msg.reply(result + " - " + fourStarOtherWeapon[Math.floor(Math.random() * fourStarOtherWeapon.length)] );
-          }
-      }
+        var flip = random(1, 2);
+        if (flip == 1) { // 50% chance to get rate up 4* character
+            msg.reply("⭐⭐⭐⭐" + " - " + randomPull("fourStarRateUp"));
+        }
+        else {
+            var flip = random(1, 2);
+            if (flip == 1) { // regular 4* character (50% chance)
+                msg.reply("⭐⭐⭐⭐" + " - " + randomPull("fourStarOtherCharacter"));
+            }
+            else {  // regular 4* weapon
+              msg.reply("⭐⭐⭐⭐" + " - " + randomPull("fourStarOtherWeapon"));
+            }
+        }
     }
     else {
-        msg.reply(result + " - " + threeStar[Math.floor(Math.random() * threeStar.length)] );
+        msg.reply("⭐⭐⭐" + " - " + randomPull("threeStar"));
     }
+
   }
+
 });
 
+////////////////// helper functions
 
-
-
+function randomPull(key) {
+  return gacha[key][Math.floor(Math.random() * gacha[key].length)];
+}
 
 function random(low, high) {
   return Math.floor(Math.random() * (high - low + 1) + low)
@@ -75,15 +82,3 @@ function generateResult() {
       return "how tf u end up here lmao";
   }
 }
-
-// maybe have textfiles of characters rather than arrays idk or put in config.json
-var fiveStarCharacters = ['Keqing', 'Mona', 'Qiqi', 'Diluc', 'Jean'];
-var fiveStarExclusive = 'Childe';
-
-var fourStarRateUp = ['Diona', 'Ningguang', 'Beidou'];
-var fourStarOtherCharacter = ['4* character1', '4* character2'];
-var fourStarOtherWeapon = ['4* weapon1', '4* weapon2'];
-
-var threeStar = ['3* weapon1', '3* weapon2'];
-
-

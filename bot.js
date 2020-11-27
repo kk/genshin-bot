@@ -12,17 +12,11 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', msg => {
-  if (msg.content === 'ping' && msg.channel.id == '781076421581209601') {
-    msg.reply('Pong!');
-  }
-});
-
 var valid = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
 client.on('message', msg => {
 
-  if (msg.content.startsWith('!roll') && msg.channel.id == '781076421581209601') {
+  if (msg.content.startsWith('!roll')) {
     var split = msg.content.split(" ");
     console.log(split);
     if (split.length > 1) {

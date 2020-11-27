@@ -18,7 +18,6 @@ client.on('message', msg => {
 
   if (msg.content.startsWith('!roll')) {
     var split = msg.content.split(" ");
-    console.log(split);
     if (split.length > 1) {
         if (valid.includes(split[1])) {
           msg.reply(pull(split[1]));
@@ -95,7 +94,6 @@ function random(low, high) {
 
 function generateResult() {
   var number = random(1,1000);
-  console.log("number is: " + number);
   if (number >= 1 && number <= 6) { // 0.6% chance
       return "5 star";
   }
